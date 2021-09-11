@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
+import {Text, View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeIcon from 'react-native-vector-icons/Ionicons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeTab from './../../screens/homeTabScreens/HomeTab';
 import CategoriesTab from './../../screens/homeTabScreens/CategoriesTab';
@@ -8,18 +11,21 @@ import OrdersTab from './../../screens/homeTabScreens/OrdersTab';
 import SettingsTab from './../../screens/homeTabScreens/SettingsTab';
 
 import AppColors from '../../config/colors';
+import MainHeaderLeft from './../layout/mainheaderLeft/MainHeaderLeft';
+import MainHeaderRight from './../layout/mainHeaderRight/MainHeaderRight';
 
 const Tab = createBottomTabNavigator();
 
-export default function HomeScreenTabNavigator() {
+export default function HomeScreenTabNavigator({navigation}) {
   const [currentRoute, setCurrentRoute] = useState('Home');
 
   return (
     <Tab.Navigator
-      options={{headerShown: false}}
+      options={{headerShown: true}}
       screenOptions={() => ({
         tabBarActiveTintColor: AppColors.primaryGreen,
         tabBarInactiveTintColor: AppColors.primarygrey,
+        headerTitle: '',
       })}>
       <Tab.Screen
         name="Home"
@@ -31,7 +37,7 @@ export default function HomeScreenTabNavigator() {
         }}
         options={{
           tabBarIcon: () => (
-            <Icon
+            <FontAwesomeIcon
               name="home"
               color={
                 currentRoute === 'Home'
@@ -41,9 +47,11 @@ export default function HomeScreenTabNavigator() {
               size={26}
             />
           ),
-          header: () => {
-            null;
+          headerStyle: {
+            backgroundColor: AppColors.primaryGreen,
           },
+          headerLeft: () => <MainHeaderLeft navigation={navigation} />,
+          headerRight: () => <MainHeaderRight navigation={navigation} />,
         }}
       />
       <Tab.Screen
@@ -56,8 +64,8 @@ export default function HomeScreenTabNavigator() {
         }}
         options={{
           tabBarIcon: () => (
-            <Icon
-              name="align-justify"
+            <FontAwesomeIcon
+              name="menu"
               color={
                 currentRoute === 'Orders'
                   ? AppColors.primaryGreen
@@ -66,9 +74,11 @@ export default function HomeScreenTabNavigator() {
               size={26}
             />
           ),
-          header: () => {
-            null;
+          headerStyle: {
+            backgroundColor: AppColors.primaryGreen,
           },
+          headerLeft: () => <MainHeaderLeft navigation={navigation} />,
+          headerRight: () => <MainHeaderRight navigation={navigation} />,
         }}
       />
       <Tab.Screen
@@ -81,8 +91,8 @@ export default function HomeScreenTabNavigator() {
         }}
         options={{
           tabBarIcon: () => (
-            <Icon
-              name="gears"
+            <MaterialIcon
+              name="category"
               color={
                 currentRoute === 'Categories'
                   ? AppColors.primaryGreen
@@ -91,9 +101,11 @@ export default function HomeScreenTabNavigator() {
               size={26}
             />
           ),
-          header: () => {
-            null;
+          headerStyle: {
+            backgroundColor: AppColors.primaryGreen,
           },
+          headerLeft: () => <MainHeaderLeft navigation={navigation} />,
+          headerRight: () => <MainHeaderRight navigation={navigation} />,
         }}
       />
       <Tab.Screen
@@ -106,8 +118,8 @@ export default function HomeScreenTabNavigator() {
         }}
         options={{
           tabBarIcon: () => (
-            <Icon
-              name="user"
+            <FontAwesomeIcon
+              name="person"
               color={
                 currentRoute === 'Settings'
                   ? AppColors.primaryGreen
@@ -116,9 +128,11 @@ export default function HomeScreenTabNavigator() {
               size={26}
             />
           ),
-          header: () => {
-            null;
+          headerStyle: {
+            backgroundColor: AppColors.primaryGreen,
           },
+          headerLeft: () => <MainHeaderLeft navigation={navigation} />,
+          headerRight: () => <MainHeaderRight navigation={navigation} />,
         }}
       />
     </Tab.Navigator>
