@@ -7,41 +7,41 @@ import {
   View,
   Text,
 } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import {NavigationContainer} from '@react-navigation/native';
+import AppColors from './src/config/colors';
+
+//custom components
+import HomeScreen from './src/screens/HomeScreen';
 
 const Drawer = createDrawerNavigator();
 
-const  App = () => {
+const App = () => {
   return (
     <NavigationContainer>
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-    </Drawer.Navigator>
-  </NavigationContainer>
+      <StatusBar backgroundColor={AppColors.primaryGreen} />
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          title: 'My App',
+          headerTintColor: AppColors.white,
+          headerStyle: {
+            backgroundColor: AppColors.primaryGreen,
+          },
+        }}>
+        <Drawer.Screen name="HomeScreen" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 };
 
-
-function HomeScreen({ navigation }) {
+function NotificationsScreen({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
-  );
-}
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <Button onPress={() => navigation.goBack()} title="Go back home" />
     </View>
   );
 }
-
 
 export default App;
