@@ -41,6 +41,7 @@ export default function UtilityPaymentScreen({navigation}) {
 
 const UtilityScreenFirst = () => {
   return (
+    //TODO : do not use inline styles. use StyleSheet
     <View
       style={{
         flex: 1,
@@ -55,6 +56,7 @@ const UtilityScreenFirst = () => {
 
 const UtilityScreenSecond = () => {
   return (
+    //TODO : do not use inline styles. use StyleSheet
     <View
       style={{
         flex: 1,

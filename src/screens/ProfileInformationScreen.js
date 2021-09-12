@@ -39,6 +39,7 @@ export default function ProfileInformationScreen({navigation}) {
 
 const ProfileInformation = () => {
   return (
+    //TODO : do not use inline styles. use StyleSheet
     <View
       style={{
         flex: 1,

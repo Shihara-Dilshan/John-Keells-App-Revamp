@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
-import {Text, View, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesomeIcon from 'react-native-vector-icons/Ionicons';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeTab from './../../screens/homeTabScreens/HomeTab';
 import CategoriesTab from './../../screens/homeTabScreens/CategoriesTab';
