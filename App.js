@@ -42,22 +42,22 @@ const App = () => {
           drawerContent={props => <CustomDrawer {...props} />}
           initialRouteName="Home"
           screenOptions={{
-            headerTintColor: AppColors.white,
+            //headerTintColor: AppColors.white,
             headerShown: false,
-            headerStyle: {
-              backgroundColor: AppColors.primaryGreen,
-            },
-            headerRight: () => (
-              <View flexDirection="row" alignItems="center">
-                <Text style={{color: AppColors.white}}>Rs. 1,916.00</Text>
-                <Icon.Button
-                  name="cart"
-                  size={25}
-                  backgroundColor={AppColors.primaryGreen}
-                  onPress={() => {}}
-                />
-              </View>
-            ),
+            // headerStyle: {
+            //   backgroundColor: AppColors.primaryGreen,
+            // },
+            // headerRight: () => (
+            //   <View flexDirection="row" alignItems="center">
+            //     <Text style={{color: AppColors.white}}>Rs. 1,916.00</Text>
+            //     <Icon.Button
+            //       name="cart"
+            //       size={25}
+            //       backgroundColor={AppColors.primaryGreen}
+            //       onPress={() => {}}
+            //     />
+            //   </View>
+            // ),
           }}>
           <Drawer.Screen name="HomeScreen" component={HomeScreen} />
           <Drawer.Screen
