@@ -3,5 +3,6 @@ export default class AppColors {
     static white = "#ffffff";
     static black = "#000000";
     static primarygrey = "#585858";
+    static lightergrey = "#A8A8A8";
 }
 
