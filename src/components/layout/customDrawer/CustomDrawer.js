@@ -15,7 +15,7 @@ export function CustomDrawer(props) {
         <View style={{flex: 1, margin: 0, padding: 0}}>
           <Drawer.Section style={{marginTop: 0}}>
             {drawerItemsList.map( (data) => {
-              return <DrawerItem props={props} data={data}/>
+              return <DrawerItem props={props} data={data} key={data.title}/>
             })}
           </Drawer.Section>
         </View>

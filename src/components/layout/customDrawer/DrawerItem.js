@@ -7,7 +7,7 @@ export default DrawerItem = ({props, data}) => {
     return(
         <TouchableOpacity
               onPress={() => {
-                props.navigation.navigate('ProfileInformation');
+                props.navigation.navigate(data.actionPageUrl);
               }}>
               <View
                 style={{

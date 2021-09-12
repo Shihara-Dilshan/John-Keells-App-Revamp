@@ -11,7 +11,6 @@ export default MainHeaderLeft = ({navigation}) => {
         size={25}
         backgroundColor={AppColors.primaryGreen}
         onPress={() => {
-            console.log(23);
           navigation.toggleDrawer();
         }}
       />

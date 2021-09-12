@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-export default function ProfileInformationScreen({navigation}) {
+export default function FAQScreen({navigation}) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Profile Information Screen</Text>
+      <Text>FAQ Screen</Text>
     </View>
   );
 }
