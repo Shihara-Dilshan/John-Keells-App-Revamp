@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StatusBar, View, Text} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
@@ -21,13 +21,23 @@ import ContactUsScreen from './src/screens/ContactUsScreen';
 import TermsAndConditionsScreen from './src/screens/TermsAndConditionsScreen';
 import PrivacyPolicyScreen from './src/screens/PrivacyPolicyScreen';
 import HelpMeNevigateScreen from './src/screens/HelpMeNevigateScreen';
+import LoadingScreen from './src/screens/LoadingScreen';
 
 const Drawer = createDrawerNavigator();
 
 const App = () => {
+  const [splashLoading, setSplashLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setSplashLoading(false);
+    }, 2000);
+  }, []);
   return (
-      <NavigationContainer>
-        <StatusBar backgroundColor={AppColors.black} />
+    <NavigationContainer>
+      <StatusBar backgroundColor={AppColors.black} />
+      {splashLoading ? (
+        <LoadingScreen />
+      ) : (
         <Drawer.Navigator
           drawerContent={props => <CustomDrawer {...props} />}
           initialRouteName="Home"
@@ -85,7 +95,8 @@ const App = () => {
             component={HelpMeNevigateScreen}
           />
         </Drawer.Navigator>
-      </NavigationContainer>
+      )}
+    </NavigationContainer>
   );
 };
 
