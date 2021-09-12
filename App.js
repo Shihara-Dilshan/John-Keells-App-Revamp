@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatusBar, Button, View, Text} from 'react-native';
+import {StatusBar, View, Text} from 'react-native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 import AppColors from './src/config/colors';
@@ -26,64 +26,66 @@ const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <StatusBar backgroundColor={AppColors.black} />
-      <Drawer.Navigator
-        drawerContent={props => <CustomDrawer {...props} />}
-        initialRouteName="Home"
-        screenOptions={{
-          headerTintColor: AppColors.white,
-          headerShown: false,
-          headerStyle: {
-            backgroundColor: AppColors.primaryGreen,
-          },
-          headerRight: () => (
-            <View flexDirection="row" alignItems="center">
-              <Text style={{color: AppColors.white}}>Rs. 1,916.00</Text>
-
-              <Icon.Button
-                name="cart"
-                size={25}
-                backgroundColor={AppColors.primaryGreen}
-                onPress={() => {}}
-              />
-            </View>
-          ),
-        }}>
-        <Drawer.Screen name="HomeScreen" component={HomeScreen} />
-        <Drawer.Screen
-          name="ProfileInformation"
-          component={ProfileInformationScreen}
-        />
-        <Drawer.Screen
-          name="utilityPayments"
-          component={UtilityPaymentScreen}
-        />
-        <Drawer.Screen
-          name="checkProductAvailability"
-          component={CheckProductAvailabilityScreen}
-        />
-        <Drawer.Screen name="DeliverGrid" component={DeliverGridScreen} />
-        <Drawer.Screen name="Storelocator" component={StoreLocatorScreen} />
-        <Drawer.Screen
-          name="NexusRegistration"
-          component={NexusRegistrationScreen}
-        />
-        <Drawer.Screen
-          name="CateloguesAndDeals"
-          component={CatelogAndDealsScreen}
-        />
-        <Drawer.Screen name="FAQ" component={FAQScreen} />
-        <Drawer.Screen name="AboutUs" component={AboutUsScreen} />
-        <Drawer.Screen name="ContactUs" component={ContactUsScreen} />
-        <Drawer.Screen
-          name="TermsAndConditions"
-          component={TermsAndConditionsScreen}
-        />
-        <Drawer.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
-        <Drawer.Screen name="HelpMeNevigate" component={HelpMeNevigateScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <StatusBar backgroundColor={AppColors.black} />
+        <Drawer.Navigator
+          drawerContent={props => <CustomDrawer {...props} />}
+          initialRouteName="Home"
+          screenOptions={{
+            headerTintColor: AppColors.white,
+            headerShown: false,
+            headerStyle: {
+              backgroundColor: AppColors.primaryGreen,
+            },
+            headerRight: () => (
+              <View flexDirection="row" alignItems="center">
+                <Text style={{color: AppColors.white}}>Rs. 1,916.00</Text>
+                <Icon.Button
+                  name="cart"
+                  size={25}
+                  backgroundColor={AppColors.primaryGreen}
+                  onPress={() => {}}
+                />
+              </View>
+            ),
+          }}>
+          <Drawer.Screen name="HomeScreen" component={HomeScreen} />
+          <Drawer.Screen
+            name="ProfileInformation"
+            component={ProfileInformationScreen}
+          />
+          <Drawer.Screen
+            name="utilityPayments"
+            component={UtilityPaymentScreen}
+          />
+          <Drawer.Screen
+            name="checkProductAvailability"
+            component={CheckProductAvailabilityScreen}
+          />
+          <Drawer.Screen name="DeliverGrid" component={DeliverGridScreen} />
+          <Drawer.Screen name="Storelocator" component={StoreLocatorScreen} />
+          <Drawer.Screen
+            name="NexusRegistration"
+            component={NexusRegistrationScreen}
+          />
+          <Drawer.Screen
+            name="CateloguesAndDeals"
+            component={CatelogAndDealsScreen}
+          />
+          <Drawer.Screen name="FAQ" component={FAQScreen} />
+          <Drawer.Screen name="AboutUs" component={AboutUsScreen} />
+          <Drawer.Screen name="ContactUs" component={ContactUsScreen} />
+          <Drawer.Screen
+            name="TermsAndConditions"
+            component={TermsAndConditionsScreen}
+          />
+          <Drawer.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
+          <Drawer.Screen
+            name="HelpMeNevigate"
+            component={HelpMeNevigateScreen}
+          />
+        </Drawer.Navigator>
+      </NavigationContainer>
   );
 };
 
