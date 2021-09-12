@@ -7,10 +7,7 @@ export default function DrawerHeader() {
   return (
     <View style={styles.drawerHeaderContainer}>
       <View style={styles.titleSecondoryContainer}>
-        <Title
-          style={styles.title}>
-          Shihara Dilshan
-        </Title>
+        <Title style={styles.title}>Shihara Dilshan</Title>
       </View>
     </View>
   );
@@ -21,7 +18,7 @@ const styles = StyleSheet.create({
     padding: 0,
     backgroundColor: AppColors.primaryGreen,
     marginTop: -9,
-    height:100
+    height: 100,
   },
   titleSecondoryContainer: {
     flexDirection: 'row',

@@ -14,6 +14,8 @@ target 'keells_rewamp' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
+
   target 'keells_rewampTests' do
     inherit! :complete
     # Pods for testing
