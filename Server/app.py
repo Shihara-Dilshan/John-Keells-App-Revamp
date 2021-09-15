@@ -9,7 +9,7 @@ app.register_blueprint(product_route)
  
 CORS(app)
 
-connect(host=os.environ.get('MONGO_URI'))
+#connect(host=os.environ.get('MONGO_URI'))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run("0.0.0.0")
