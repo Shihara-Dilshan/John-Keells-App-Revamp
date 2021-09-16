@@ -2,7 +2,9 @@ from model.product import Product
 from flask import make_response
 from utils.DecimalEncoder import Encoder
 import json
+from utils.JwtToken import validate_token
 
+@validate_token
 def add_product_service(product_data):
     try:
         title = product_data['title']
@@ -75,6 +77,7 @@ def get_product_by_category_service(categoryName):
     except Exception as e:
         return make_response({'message' : str(e)}, 404)  
 
+@validate_token
 def update_product_service(product_id, product_data):
     try:
         product = Product.objects(id=product_id) # return a queryset
@@ -94,6 +97,7 @@ def update_product_service(product_id, product_data):
     except Exception as e:
         return make_response({'message' : str(e)}, 404)  
 
+@validate_token
 def delete_product_service(product_id):
     try:
         product = Product.objects(id=product_id) 
