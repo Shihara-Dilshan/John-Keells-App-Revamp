@@ -6,8 +6,8 @@ from api.user import user_route
 from mongoengine import connect
 
 app = Flask(__name__)
-app.register_blueprint(product_route)
 app.register_blueprint(user_route)
+app.register_blueprint(product_route)
 
 CORS(app)
 
