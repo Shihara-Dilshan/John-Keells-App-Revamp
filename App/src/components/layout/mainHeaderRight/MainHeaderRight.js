@@ -11,7 +11,9 @@ export default MainHeaderRight = ({navigation}) => {
         name="cart"
         size={25}
         backgroundColor={AppColors.primaryGreen}
-        onPress={() => {}}
+        onPress={() => {
+          navigation.navigate("cartScreen");
+        }}
       />
     </View>
   );

@@ -22,6 +22,7 @@ import TermsAndConditionsScreen from './src/screens/TermsAndConditionsScreen';
 import PrivacyPolicyScreen from './src/screens/PrivacyPolicyScreen';
 import HelpMeNevigateScreen from './src/screens/HelpMeNevigateScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
+import CartScreen from './src/screens/CartScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -42,23 +43,12 @@ const App = () => {
           drawerContent={props => <CustomDrawer {...props} />}
           initialRouteName="Home"
           screenOptions={{
-            //headerTintColor: AppColors.white,
             headerShown: false,
-            // headerStyle: {
-            //   backgroundColor: AppColors.primaryGreen,
-            // },
-            // headerRight: () => (
-            //   <View flexDirection="row" alignItems="center">
-            //     <Text style={{color: AppColors.white}}>Rs. 1,916.00</Text>
-            //     <Icon.Button
-            //       name="cart"
-            //       size={25}
-            //       backgroundColor={AppColors.primaryGreen}
-            //       onPress={() => {}}
-            //     />
-            //   </View>
-            // ),
           }}>
+            {/* 
+            Define all the screens that needs to render(show) inside the custom
+            drawer navigater. 
+            */}
           <Drawer.Screen name="HomeScreen" component={HomeScreen} />
           <Drawer.Screen
             name="ProfileInformation"
@@ -93,6 +83,14 @@ const App = () => {
           <Drawer.Screen
             name="HelpMeNevigate"
             component={HelpMeNevigateScreen}
+          />
+           {/* 
+            Define all the screens that needs to render(show) outside the custom
+            drawer navigater. 
+            */}
+           <Drawer.Screen
+            name="cartScreen"
+            component={CartScreen}
           />
         </Drawer.Navigator>
       )}
