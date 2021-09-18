@@ -1,13 +1,25 @@
-import React from 'react';
-import {View, Text, StyleSheet, Dimensions, Image} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 import AppColors from '../config/colors';
-import {ScrollView} from 'react-native-gesture-handler';
-import CommonButton from '../components/common/CommonButton';
-import LineDivider from '../components/common/LineDivider';
 import ShoppingCartItem from '../components/shoppingCart/ShoppingCartItem';
+
+import React, {useState} from 'react';
+import {
+  Animated,
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  Alert,
+  FlatList,
+} from 'react-native';
+import {RectButton} from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import CommonButton from '../components/common/CommonButton';
+import LineDividers from '../components/common/LineDivider';
+import {IconButton} from 'react-native-paper';
 
 const Stack = createStackNavigator();
 
@@ -42,7 +54,32 @@ export default function CartScreen({navigation}) {
   );
 }
 
-const Cart = () => {
+function Cart() {
+  const [data, setData] = useState([1, 2, 3, 4, 5, 67, 8, 9]);
+  const renderLeftActions = (progress, dragX) => {
+    const trans = dragX.interpolate({
+      inputRange: [0, 50, 100, 101],
+      outputRange: [-20, 0, 0, 1],
+    });
+    return (
+      <View
+        style={{
+          display: 'flex',
+          alignContent: 'center',
+          alignItems: 'center',
+          alignSelf: 'center',
+          marginTop: 25,
+        }}>
+        <IconButton
+          icon="delete-forever"
+          color={'red'}
+          size={25}
+          onPress={() => console.log('Pressed')}
+        />
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.emptyTop}></View>
@@ -69,23 +106,23 @@ const Cart = () => {
               />
             </View>
           </View>
-          <LineDivider color={AppColors.lightergrey} />
-          {/*TODO:: Replace ScrollView with List View*/}
-          <ScrollView>
-            <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-            <ShoppingCartItem image="https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-            <ShoppingCartItem image="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-            <ShoppingCartItem image="https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-            <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-            <ShoppingCartItem image="https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-            <ShoppingCartItem image="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-            <ShoppingCartItem image="https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-          </ScrollView>
+          <LineDividers color={AppColors.lightergrey} />
+          <FlatList
+            keyExtractor={data => data}
+            data={data}
+            renderItem={item => (
+              <Swipeable
+                renderRightActions={renderLeftActions}
+                onSwipeableWillOpen={() => {}}>
+                <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+              </Swipeable>
+            )}
+          />
         </View>
       </Animatable.View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -123,6 +160,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   cartTopDataLeftText: {
-    marginLeft: 5
+    marginLeft: 5,
   },
 });

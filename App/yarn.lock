@@ -5691,6 +5691,11 @@ react-native-screens@^3.7.0:
   dependencies:
     warn-once "^0.1.0"
 
+react-native-swipe-list-view@^3.2.9:
+  version "3.2.9"
+  resolved "https://registry.yarnpkg.com/react-native-swipe-list-view/-/react-native-swipe-list-view-3.2.9.tgz#d725c7cdf481dd5df12a00dbfe0120013b5f2e59"
+  integrity sha512-SjAEuHc/D6ovp+RjDUhfNmw6NYOntdT7+GFhfMGfP/BSLMuMWynpzJy9GKQeyB8sI78T6Lzip21TVbongOg1Mw==
+
 react-native-vector-icons@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-8.1.0.tgz#e8ee2b17bc4d9f636da1c6f67feee8e2a850c3d8"
@@ -5753,6 +5758,11 @@ react-shallow-renderer@^16.13.1:
   dependencies:
     object-assign "^4.1.1"
     react-is "^16.12.0 || ^17.0.0"
+
+react-swipeable-list@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-swipeable-list/-/react-swipeable-list-1.4.0.tgz#4c025613de6d4f28386ae8c54fb4752d6543f718"
+  integrity sha512-436dulOK7QoYx9cX2SXcxAbPPX5Z7YUkc1iBfIvQCJeIdMsGXDlOOMbgQ1jfUL0RlrrDuGKFHDIGTvvoTUGKxg==
 
 react-test-renderer@17.0.2:
   version "17.0.2"
