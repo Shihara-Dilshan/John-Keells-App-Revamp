@@ -50,7 +50,10 @@ const Cart = () => {
         <View style={styles.cartBottomContainer}>
           <View style={styles.topRowContainer}>
             <View style={styles.topRow}>
-              <Text>4 items</Text>
+              <View style={styles.cartTopDataLeft}>
+                <Icon name="cart" size={20} color="black" />
+                <Text style={styles.cartTopDataLeftText}>4 items</Text>
+              </View>
               <Text>Total - Rs 2300</Text>
             </View>
             <View style={styles.topRow}>
@@ -69,13 +72,14 @@ const Cart = () => {
           <LineDivider color={AppColors.lightergrey} />
           {/*TODO:: Replace ScrollView with List View*/}
           <ScrollView>
-            <ShoppingCartItem />
-            <ShoppingCartItem />
-            <ShoppingCartItem />
-            <ShoppingCartItem />
-            <ShoppingCartItem />
-            <ShoppingCartItem />
-            <ShoppingCartItem />
+            <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <ShoppingCartItem image="https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <ShoppingCartItem image="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <ShoppingCartItem image="https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <ShoppingCartItem image="https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <ShoppingCartItem image="https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+            <ShoppingCartItem image="https://images.pexels.com/photos/196643/pexels-photo-196643.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
           </ScrollView>
         </View>
       </Animatable.View>
@@ -113,5 +117,12 @@ const styles = StyleSheet.create({
   },
   emptyTop: {
     flex: 1,
+  },
+  cartTopDataLeft: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  cartTopDataLeftText: {
+    marginLeft: 5
   },
 });

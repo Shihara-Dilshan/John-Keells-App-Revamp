@@ -3,26 +3,26 @@ import {View, Image, Text, StyleSheet} from 'react-native';
 import AppColors from '../../config/colors';
 import ItemCountController from './ItemCountController';
 
-export default function ShoppingCartItem() {
+export default function ShoppingCartItem({image}) {
   return (
     <View style={styles.container}>
       <View style={styles.leftPartContainer}>
         <Image
           style={styles.image}
           source={{
-            uri: 'https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            uri: image,
           }}
         />
         <View style={styles.leftDetails}>
           <Text>Milk Mole</Text>
           <Text>2 units</Text>
-          <Text>Rs. 500</Text>
+          <Text style={{color: AppColors.primaryGreen}}>Rs. 500</Text>
         </View>
       </View>
       <View style={styles.rightPartContainer}>
         <ItemCountController
           icon="remove-circle-sharp"
-          color={AppColors.lightergrey}
+          color={AppColors.primaryRed}
         />
         <Text style={{fontSize: 25}}> 5 </Text>
         <ItemCountController
@@ -39,13 +39,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: 15,
+    paddingTop: 25,
     alignItems: 'center',
   },
   image: {
-    width: 90,
-    height: 90,
-    borderRadius: 50,
+    width: 70,
+    height: 70,
+    borderRadius: 10,
   },
   leftPartContainer: {
     display: 'flex',
