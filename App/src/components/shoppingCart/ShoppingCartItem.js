@@ -24,7 +24,7 @@ export default function ShoppingCartItem({image}) {
           icon="remove-circle-sharp"
           color={AppColors.primaryRed}
         />
-        <Text style={{fontSize: 25}}> 5 </Text>
+        <Text style={{fontSize: 20}}> 5 </Text>
         <ItemCountController
           icon="add-circle-sharp"
           color={AppColors.primaryGreen}
