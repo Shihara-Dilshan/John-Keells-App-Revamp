@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppColors from '../../config/colors';
+import {CartContext} from '../../contexts/cart/CartContext';
 
 export default CartIconWithBadge = ({navigation}) => {
+  const [cartItems, setCartItems] = useContext(CartContext);
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -11,7 +14,9 @@ export default CartIconWithBadge = ({navigation}) => {
       }}>
       <View style={styles.container}>
         <View style={styles.badge}>
-          <Text style={styles.badgeText}>3</Text>
+          <Text style={styles.badgeText}>
+            {cartItems.length > 9 ? '9+' : cartItems.length}
+          </Text>
         </View>
         <View>
           <Icon.Button

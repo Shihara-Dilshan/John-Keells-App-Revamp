@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 import AppColors from '../../config/colors';
 import ItemCountController from './ItemCountController';
@@ -22,7 +22,7 @@ export default function ShoppingCartItem({image}) {
       <View style={styles.rightPartContainer}>
         <ItemCountController
           icon="remove-circle-sharp"
-          color={AppColors.primaryRed}
+          color={AppColors.primarygrey}
         />
         <Text style={{fontSize: 20}}> 5 </Text>
         <ItemCountController

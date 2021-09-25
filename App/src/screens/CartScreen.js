@@ -4,7 +4,7 @@ import * as Animatable from 'react-native-animatable';
 import AppColors from '../config/colors';
 import ShoppingCartItem from '../components/shoppingCart/ShoppingCartItem';
 
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   Animated,
   View,
@@ -20,6 +20,8 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 import CommonButton from '../components/common/CommonButton';
 import LineDividers from '../components/common/LineDivider';
 import {IconButton} from 'react-native-paper';
+import CartRemoveModel from '../components/shoppingCart/CartRemoveModel';
+import {CartContext} from '../contexts/cart/CartContext';
 
 const Stack = createStackNavigator();
 
@@ -55,12 +57,8 @@ export default function CartScreen({navigation}) {
 }
 
 function Cart() {
-  const [data, setData] = useState([1, 2, 3, 4, 5, 67, 8, 9]);
-  const renderLeftActions = (progress, dragX) => {
-    const trans = dragX.interpolate({
-      inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1],
-    });
+  const [cartItems, setCartItems] = useContext(CartContext);
+  const renderLeftActions = id => {
     return (
       <View
         style={{
@@ -70,12 +68,7 @@ function Cart() {
           alignSelf: 'center',
           marginTop: 25,
         }}>
-        <IconButton
-          icon="delete-forever"
-          color={'red'}
-          size={25}
-          onPress={() => console.log('Pressed')}
-        />
+        <CartRemoveModel id={id} />
       </View>
     );
   };
@@ -89,7 +82,9 @@ function Cart() {
             <View style={styles.topRow}>
               <View style={styles.cartTopDataLeft}>
                 <Icon name="cart" size={20} color="black" />
-                <Text style={styles.cartTopDataLeftText}>4 items</Text>
+                <Text style={styles.cartTopDataLeftText}>
+                  {cartItems.length} {cartItems.length > 1 ? 'items' : 'item'}
+                </Text>
               </View>
               <Text>Total - Rs 2300</Text>
             </View>
@@ -108,15 +103,17 @@ function Cart() {
           </View>
           <LineDividers color={AppColors.lightergrey} />
           <FlatList
-            keyExtractor={data => data}
-            data={data}
-            renderItem={item => (
-              <Swipeable
-                renderRightActions={renderLeftActions}
-                onSwipeableWillOpen={() => {}}>
-                <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-              </Swipeable>
-            )}
+            keyExtractor={data => data._id}
+            data={cartItems}
+            renderItem={item => {
+              return (
+                <Swipeable
+                  renderRightActions={() => renderLeftActions(item.item._id)}
+                  onSwipeableWillOpen={() => {}}>
+                  <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+                </Swipeable>
+              );
+            }}
           />
         </View>
       </Animatable.View>
