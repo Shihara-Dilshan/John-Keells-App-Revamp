@@ -5,6 +5,7 @@ export default class AppColors {
   static lightergrey = '#A8A8A8';
   static white = '#ffffff';
   static black = '#000000';
+  static black90 = 'rgba(0,0,0,0.9)';
   static formgrey = '#f4f4f4';
   static statusBlue = '#5856EB';
   static lightestGrey = '#8B8B8B';

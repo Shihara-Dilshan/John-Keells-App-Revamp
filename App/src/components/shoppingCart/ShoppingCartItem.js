@@ -1,9 +1,76 @@
 import React, {useContext} from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet, Alert} from 'react-native';
 import AppColors from '../../config/colors';
+import {CartContext} from '../../contexts/cart/CartContext';
 import ItemCountController from './ItemCountController';
+import Snackbar from 'react-native-snackbar';
 
-export default function ShoppingCartItem({image}) {
+export default function ShoppingCartItem({
+  image,
+  name,
+  quantity,
+  id,
+  unitPrice,
+}) {
+  const [cartItems, setCartItems] = useContext(CartContext);
+
+  function removeFromCart(id) {
+    Alert.alert(
+      'Confirm',
+      'Are you sure want to remove this item from the cart?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: () => {
+            const tempCart = cartItems;
+            setCartItems([...cartItems.filter(item => item._id != id)]);
+            Snackbar.show({
+              text: 'Item removed from cart',
+              duration: Snackbar.LENGTH_LONG,
+              action: {
+                text: 'UNDO',
+                textColor: 'green',
+                onPress: () => {
+                  setCartItems(tempCart);
+                },
+              },
+            });
+          },
+        },
+      ],
+    );
+  }
+  const increaseItem = () => {
+    const increadList = cartItems.map(item => {
+      if (item._id == id) {
+        item._quatity++;
+        return item;
+      }
+      return item;
+    });
+    setCartItems(increadList);
+  };
+
+  const decreaseItem = () => {
+    const increadList = cartItems.map(item => {
+      if (item._id == id) {
+        if (item._quatity > 1) {
+          item._quatity--;
+        } else {
+          removeFromCart(id);
+        }
+        return item;
+      }
+      return item;
+    });
+    setCartItems(increadList);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.leftPartContainer}>
@@ -14,20 +81,26 @@ export default function ShoppingCartItem({image}) {
           }}
         />
         <View style={styles.leftDetails}>
-          <Text>Milk Mole</Text>
-          <Text>2 units</Text>
-          <Text style={{color: AppColors.primaryGreen}}>Rs. 500</Text>
+          <Text>{name}</Text>
+          <Text>
+            Rs {quantity} x {unitPrice}
+          </Text>
+          <Text style={{color: AppColors.primaryGreen}}>
+            Rs. {quantity * unitPrice}
+          </Text>
         </View>
       </View>
       <View style={styles.rightPartContainer}>
         <ItemCountController
           icon="remove-circle-sharp"
           color={AppColors.primarygrey}
+          onPress={decreaseItem}
         />
-        <Text style={{fontSize: 20}}> 5 </Text>
+        <Text style={{fontSize: 20}}> {quantity} </Text>
         <ItemCountController
           icon="add-circle-sharp"
           color={AppColors.primaryGreen}
+          onPress={increaseItem}
         />
       </View>
     </View>
