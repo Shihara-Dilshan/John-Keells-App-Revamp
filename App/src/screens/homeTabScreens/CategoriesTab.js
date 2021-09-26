@@ -9,7 +9,7 @@ import {
   LayoutAnimation,
 } from 'react-native';
 import AppColors from '../../config/colors';
-import {categoryData as CONTENT} from "./misc/CategoryData";
+import CONTENT from "./misc/CategoryData";
 
 const ExpandableComponent = ({item, onclickFunction}) => {
   const [layoutHeight, setlayoutHeight] = useState(0);
