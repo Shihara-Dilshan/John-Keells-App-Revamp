@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Image,
@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Alert,
   TouchableOpacity,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import AppColors from '../../config/colors';
 import {CartContext} from '../../contexts/cart/CartContext';
@@ -21,52 +22,70 @@ export default function ShoppingCartItem({
   unitPrice,
 }) {
   const [cartItems, setCartItems, actions] = useContext(CartContext);
+  const [showDeleteIcon, setShowDeleteIcon] = useState(false);
+
+  function handleShowDeleteIcon() {
+    setShowDeleteIcon(true);
+    setTimeout(() => {
+      setShowDeleteIcon(false);
+    }, 2000);
+  }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.leftPartContainer}>
-        <View>
-          <Image
-            style={styles.image}
-            source={{
-              uri: image,
-            }}
-          />
-          <View style={{position: "absolute", top: -15,left: 53}}>
-          <TouchableOpacity onPress={() => actions.removeItem(id)}>
-            <Icon
-              name="close-circle-sharp"
-              size={30}
-              color={AppColors.primaryRed}
+    <TouchableWithoutFeedback onPress={handleShowDeleteIcon} onLongPress={handleShowDeleteIcon}>
+      <View style={styles.container}>
+        <View style={styles.leftPartContainer}>
+          <View>
+            <Image
+              style={styles.image}
+              source={{
+                uri: image,
+              }}
             />
-          </TouchableOpacity>
+            {showDeleteIcon ? (
+              <View style={{position: 'absolute', top: -15, left: 53}}>
+                <TouchableOpacity onPress={() => actions.removeItem(id)}>
+                  <Icon
+                    name="close-circle-sharp"
+                    size={30}
+                    color={AppColors.primaryRed}
+                  />
+                </TouchableOpacity>
+              </View>
+            ) : null}
+          </View>
+
+          <View style={styles.leftDetails}>
+            <Text>{name}</Text>
+            <Text>
+              Rs {quantity} x {unitPrice}
+            </Text>
+            <Text style={{color: AppColors.primaryGreen}}>
+              Rs. {quantity * unitPrice}
+            </Text>
           </View>
         </View>
-
-        <View style={styles.leftDetails}>
-          <Text>{name}</Text>
-          <Text>
-            Rs {quantity} x {unitPrice}
-          </Text>
-          <Text style={{color: AppColors.primaryGreen}}>
-            Rs. {quantity * unitPrice}
-          </Text>
+        <View style={styles.rightPartContainer}>
+          <ItemCountController
+            icon="remove-circle-sharp"
+            color={AppColors.primarygrey}
+            onPress={() => {
+              actions.decrementCartItemQuanity(id);
+              handleShowDeleteIcon();
+            }}
+          />
+          <Text style={{fontSize: 20}}> {quantity} </Text>
+          <ItemCountController
+            icon="add-circle-sharp"
+            color={AppColors.primaryGreen}
+            onPress={() => {
+              actions.incrementCartItemQuanity(id);
+              handleShowDeleteIcon();
+            }}
+          />
         </View>
       </View>
-      <View style={styles.rightPartContainer}>
-        <ItemCountController
-          icon="remove-circle-sharp"
-          color={AppColors.primarygrey}
-          onPress={() => actions.decrementCartItemQuanity(id)}
-        />
-        <Text style={{fontSize: 20}}> {quantity} </Text>
-        <ItemCountController
-          icon="add-circle-sharp"
-          color={AppColors.primaryGreen}
-          onPress={() => actions.incrementCartItemQuanity(id)}
-        />
-      </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
