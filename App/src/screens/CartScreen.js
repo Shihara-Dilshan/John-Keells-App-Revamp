@@ -58,48 +58,15 @@ export default function CartScreen({navigation}) {
 }
 
 function Cart() {
-  const [cartItems, setCartItems] = useContext(CartContext);
+  const [cartItems, setCartItems, actions] = useContext(CartContext);
 
   const calculateTotal = () => {
     let total = 0;
     cartItems.forEach(item => {
-      console.log(item._quatity * item._unitPrice);
       total = total + item._quatity * item._unitPrice;
     });
     return total.toString();
   };
-
-  function removeFromCart(id) {
-    Alert.alert(
-      'Confirm',
-      'Are you sure want to remove this item from the cart?',
-      [
-        {
-          text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'Yes',
-          onPress: () => {
-            const tempCart = cartItems;
-            setCartItems([...cartItems.filter(item => item._id != id)]);
-            Snackbar.show({
-              text: 'Item removed from cart',
-              duration: Snackbar.LENGTH_LONG,
-              action: {
-                text: 'UNDO',
-                textColor: 'green',
-                onPress: () => {
-                  setCartItems(tempCart);
-                },
-              },
-            });
-          },
-        },
-      ],
-    );
-  }
 
   function clearCart() {
     Alert.alert(
@@ -115,7 +82,7 @@ function Cart() {
           text: 'Yes',
           onPress: () => {
             const tempCart = cartItems;
-            setCartItems([]);
+            actions.clearFullCart();
             Snackbar.show({
               text: 'Cart has been cleared',
               duration: Snackbar.LENGTH_LONG,
@@ -123,7 +90,7 @@ function Cart() {
                 text: 'UNDO',
                 textColor: 'green',
                 onPress: () => {
-                  setCartItems(tempCart);
+                  actions.undoClearFullCart(tempCart);
                 },
               },
             });
@@ -148,7 +115,7 @@ function Cart() {
           color={'red'}
           size={25}
           onPress={() => {
-            removeFromCart(id);
+            actions.removeItem(id);
           }}
         />
       </View>

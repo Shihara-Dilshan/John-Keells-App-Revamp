@@ -12,64 +12,7 @@ export default function ShoppingCartItem({
   id,
   unitPrice,
 }) {
-  const [cartItems, setCartItems] = useContext(CartContext);
-
-  function removeFromCart(id) {
-    Alert.alert(
-      'Confirm',
-      'Are you sure want to remove this item from the cart?',
-      [
-        {
-          text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
-          style: 'cancel',
-        },
-        {
-          text: 'Yes',
-          onPress: () => {
-            const tempCart = cartItems;
-            setCartItems([...cartItems.filter(item => item._id != id)]);
-            Snackbar.show({
-              text: 'Item removed from cart',
-              duration: Snackbar.LENGTH_LONG,
-              action: {
-                text: 'UNDO',
-                textColor: 'green',
-                onPress: () => {
-                  setCartItems(tempCart);
-                },
-              },
-            });
-          },
-        },
-      ],
-    );
-  }
-  const increaseItem = () => {
-    const increadList = cartItems.map(item => {
-      if (item._id == id) {
-        item._quatity++;
-        return item;
-      }
-      return item;
-    });
-    setCartItems(increadList);
-  };
-
-  const decreaseItem = () => {
-    const increadList = cartItems.map(item => {
-      if (item._id == id) {
-        if (item._quatity > 1) {
-          item._quatity--;
-        } else {
-          removeFromCart(id);
-        }
-        return item;
-      }
-      return item;
-    });
-    setCartItems(increadList);
-  };
+  const [cartItems, setCartItems, actions] = useContext(CartContext);
 
   return (
     <View style={styles.container}>
@@ -94,13 +37,13 @@ export default function ShoppingCartItem({
         <ItemCountController
           icon="remove-circle-sharp"
           color={AppColors.primarygrey}
-          onPress={decreaseItem}
+          onPress={() => actions.decrementCartItemQuanity(id)}
         />
         <Text style={{fontSize: 20}}> {quantity} </Text>
         <ItemCountController
           icon="add-circle-sharp"
           color={AppColors.primaryGreen}
-          onPress={increaseItem}
+          onPress={() => actions.incrementCartItemQuanity(id)}
         />
       </View>
     </View>
