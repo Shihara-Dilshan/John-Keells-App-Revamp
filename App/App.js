@@ -25,7 +25,8 @@ import LoadingScreen from './src/screens/LoadingScreen';
 import CartScreen from './src/screens/CartScreen';
 
 //contexts
-import { CartProvider } from "./src/contexts/cart/CartContext";
+import {CartProvider} from './src/contexts/cart/CartContext';
+import {OrderProvider} from './src/contexts/order/OrderContext';
 
 const Drawer = createDrawerNavigator();
 
@@ -43,60 +44,65 @@ const App = () => {
         <LoadingScreen />
       ) : (
         <CartProvider>
-          <Drawer.Navigator
-            drawerContent={props => <CustomDrawer {...props} />}
-            initialRouteName="Home"
-            screenOptions={{
-              headerShown: false,
-            }}>
-            {/* 
+          <OrderProvider>
+            <Drawer.Navigator
+              drawerContent={props => <CustomDrawer {...props} />}
+              initialRouteName="Home"
+              screenOptions={{
+                headerShown: false,
+              }}>
+              {/* 
             Define all the screens that needs to render(show) inside the custom
             drawer navigater. 
             */}
-            <Drawer.Screen name="HomeScreen" component={HomeScreen} />
-            <Drawer.Screen
-              name="ProfileInformation"
-              component={ProfileInformationScreen}
-            />
-            <Drawer.Screen
-              name="utilityPayments"
-              component={UtilityPaymentScreen}
-            />
-            <Drawer.Screen
-              name="checkProductAvailability"
-              component={CheckProductAvailabilityScreen}
-            />
-            <Drawer.Screen name="DeliverGrid" component={DeliverGridScreen} />
-            <Drawer.Screen name="Storelocator" component={StoreLocatorScreen} />
-            <Drawer.Screen
-              name="NexusRegistration"
-              component={NexusRegistrationScreen}
-            />
-            <Drawer.Screen
-              name="CateloguesAndDeals"
-              component={CatelogAndDealsScreen}
-            />
-            <Drawer.Screen name="FAQ" component={FAQScreen} />
-            <Drawer.Screen name="AboutUs" component={AboutUsScreen} />
-            <Drawer.Screen name="ContactUs" component={ContactUsScreen} />
-            <Drawer.Screen
-              name="TermsAndConditions"
-              component={TermsAndConditionsScreen}
-            />
-            <Drawer.Screen
-              name="PrivacyPolicy"
-              component={PrivacyPolicyScreen}
-            />
-            <Drawer.Screen
-              name="HelpMeNevigate"
-              component={HelpMeNevigateScreen}
-            />
-            {/* 
+              <Drawer.Screen name="HomeScreen" component={HomeScreen} />
+              <Drawer.Screen
+                name="ProfileInformation"
+                component={ProfileInformationScreen}
+              />
+              <Drawer.Screen
+                name="utilityPayments"
+                component={UtilityPaymentScreen}
+              />
+              <Drawer.Screen
+                name="checkProductAvailability"
+                component={CheckProductAvailabilityScreen}
+              />
+              <Drawer.Screen name="DeliverGrid" component={DeliverGridScreen} />
+              <Drawer.Screen
+                name="Storelocator"
+                component={StoreLocatorScreen}
+              />
+              <Drawer.Screen
+                name="NexusRegistration"
+                component={NexusRegistrationScreen}
+              />
+              <Drawer.Screen
+                name="CateloguesAndDeals"
+                component={CatelogAndDealsScreen}
+              />
+              <Drawer.Screen name="FAQ" component={FAQScreen} />
+              <Drawer.Screen name="AboutUs" component={AboutUsScreen} />
+              <Drawer.Screen name="ContactUs" component={ContactUsScreen} />
+              <Drawer.Screen
+                name="TermsAndConditions"
+                component={TermsAndConditionsScreen}
+              />
+              <Drawer.Screen
+                name="PrivacyPolicy"
+                component={PrivacyPolicyScreen}
+              />
+              <Drawer.Screen
+                name="HelpMeNevigate"
+                component={HelpMeNevigateScreen}
+              />
+              {/* 
             Define all the screens that needs to render(show) outside the custom
             drawer navigater. 
             */}
-            <Drawer.Screen name="cartScreen" component={CartScreen} />
-          </Drawer.Navigator>
+              <Drawer.Screen name="cartScreen" component={CartScreen} />
+            </Drawer.Navigator>
+          </OrderProvider>
         </CartProvider>
       )}
     </NavigationContainer>

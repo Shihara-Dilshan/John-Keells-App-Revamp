@@ -25,6 +25,7 @@ export default function ShoppingCartItem({
   const [showDeleteIcon, setShowDeleteIcon] = useState(false);
 
   function handleShowDeleteIcon() {
+    //TODO:: handle memory leak
     setShowDeleteIcon(true);
     setTimeout(() => {
       setShowDeleteIcon(false);
@@ -32,7 +33,9 @@ export default function ShoppingCartItem({
   }
 
   return (
-    <TouchableWithoutFeedback onPress={handleShowDeleteIcon} onLongPress={handleShowDeleteIcon}>
+    <TouchableWithoutFeedback
+      onPress={handleShowDeleteIcon}
+      onLongPress={handleShowDeleteIcon}>
       <View style={styles.container}>
         <View style={styles.leftPartContainer}>
           <View>
