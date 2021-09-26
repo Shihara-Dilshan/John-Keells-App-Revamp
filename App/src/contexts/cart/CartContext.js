@@ -72,7 +72,6 @@ export const CartProvider = props => {
         },
       ],
     );
-    setCartItems([...cartItems.filter(item => item._id != id)]);
   }
 
   function undoRemoveItem(previousCart) {

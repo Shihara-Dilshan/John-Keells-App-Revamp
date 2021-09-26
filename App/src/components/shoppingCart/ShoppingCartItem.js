@@ -1,9 +1,17 @@
 import React, {useContext} from 'react';
-import {View, Image, Text, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import AppColors from '../../config/colors';
 import {CartContext} from '../../contexts/cart/CartContext';
 import ItemCountController from './ItemCountController';
 import Snackbar from 'react-native-snackbar';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function ShoppingCartItem({
   image,
@@ -17,12 +25,24 @@ export default function ShoppingCartItem({
   return (
     <View style={styles.container}>
       <View style={styles.leftPartContainer}>
-        <Image
-          style={styles.image}
-          source={{
-            uri: image,
-          }}
-        />
+        <View>
+          <Image
+            style={styles.image}
+            source={{
+              uri: image,
+            }}
+          />
+          <View style={{position: "absolute", top: -15,left: 53}}>
+          <TouchableOpacity onPress={() => actions.removeItem(id)}>
+            <Icon
+              name="close-circle-sharp"
+              size={30}
+              color={AppColors.primaryRed}
+            />
+          </TouchableOpacity>
+          </View>
+        </View>
+
         <View style={styles.leftDetails}>
           <Text>{name}</Text>
           <Text>

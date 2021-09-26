@@ -157,9 +157,9 @@ function Cart() {
               data={cartItems}
               renderItem={item => {
                 return (
-                  <Swipeable
-                    renderRightActions={() => renderLeftActions(item.item._id)}
-                    onSwipeableWillOpen={() => {}}>
+                  // <Swipeable
+                  //   renderRightActions={() => renderLeftActions(item.item._id)}
+                  //   onSwipeableWillOpen={() => {}}>
                     <ShoppingCartItem
                       image={item.item._imageUrl}
                       name={item.item._title}
@@ -167,7 +167,7 @@ function Cart() {
                       id={item.item._id}
                       unitPrice={item.item._unitPrice}
                     />
-                  </Swipeable>
+                  // </Swipeable>
                 );
               }}
             />
@@ -194,8 +194,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     flex: 40,
     backgroundColor: AppColors.white,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
     width: Dimensions.get('window').width,
   },
   topRow: {
