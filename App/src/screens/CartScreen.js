@@ -3,8 +3,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as Animatable from 'react-native-animatable';
 import AppColors from '../config/colors';
 import ShoppingCartItem from '../components/shoppingCart/ShoppingCartItem';
+import Snackbar from 'react-native-snackbar';
 
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   Animated,
   View,
@@ -19,7 +20,9 @@ import {RectButton} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import CommonButton from '../components/common/CommonButton';
 import LineDividers from '../components/common/LineDivider';
+import EmptyCart from '../components/shoppingCart/EmptyCart';
 import {IconButton} from 'react-native-paper';
+import {CartContext} from '../contexts/cart/CartContext';
 
 const Stack = createStackNavigator();
 
@@ -55,12 +58,49 @@ export default function CartScreen({navigation}) {
 }
 
 function Cart() {
-  const [data, setData] = useState([1, 2, 3, 4, 5, 67, 8, 9]);
-  const renderLeftActions = (progress, dragX) => {
-    const trans = dragX.interpolate({
-      inputRange: [0, 50, 100, 101],
-      outputRange: [-20, 0, 0, 1],
+  const [cartItems, setCartItems, actions] = useContext(CartContext);
+
+  const calculateTotal = () => {
+    let total = 0;
+    cartItems.forEach(item => {
+      total = total + item._quatity * item._unitPrice;
     });
+    return total.toString();
+  };
+
+  function clearCart() {
+    Alert.alert(
+      'Confirm',
+      'Are you sure want to remove all items from the cart?',
+      [
+        {
+          text: 'No',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: () => {
+            const tempCart = cartItems;
+            actions.clearFullCart();
+            Snackbar.show({
+              text: 'Cart has been cleared',
+              duration: Snackbar.LENGTH_LONG,
+              action: {
+                text: 'UNDO',
+                textColor: 'green',
+                onPress: () => {
+                  actions.undoClearFullCart(tempCart);
+                },
+              },
+            });
+          },
+        },
+      ],
+    );
+  }
+
+  const renderLeftActions = id => {
     return (
       <View
         style={{
@@ -74,7 +114,9 @@ function Cart() {
           icon="delete-forever"
           color={'red'}
           size={25}
-          onPress={() => console.log('Pressed')}
+          onPress={() => {
+            actions.removeItem(id);
+          }}
         />
       </View>
     );
@@ -89,14 +131,16 @@ function Cart() {
             <View style={styles.topRow}>
               <View style={styles.cartTopDataLeft}>
                 <Icon name="cart" size={20} color="black" />
-                <Text style={styles.cartTopDataLeftText}>4 items</Text>
+                <Text style={styles.cartTopDataLeftText}>
+                  {cartItems.length} {cartItems.length > 1 ? 'items' : 'item'}
+                </Text>
               </View>
-              <Text>Total - Rs 2300</Text>
+              <Text>Total - Rs {calculateTotal()}</Text>
             </View>
             <View style={styles.topRow}>
               <CommonButton
                 title="Clear"
-                onPress={() => {}}
+                onPress={clearCart}
                 color={AppColors.white}
               />
               <CommonButton
@@ -107,17 +151,29 @@ function Cart() {
             </View>
           </View>
           <LineDividers color={AppColors.lightergrey} />
-          <FlatList
-            keyExtractor={data => data}
-            data={data}
-            renderItem={item => (
-              <Swipeable
-                renderRightActions={renderLeftActions}
-                onSwipeableWillOpen={() => {}}>
-                <ShoppingCartItem image="https://images.pexels.com/photos/2097090/pexels-photo-2097090.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
-              </Swipeable>
-            )}
-          />
+          {cartItems.length >= 1 ? (
+            <FlatList
+              keyExtractor={data => data._id}
+              data={cartItems}
+              renderItem={item => {
+                return (
+                  // <Swipeable
+                  //   renderRightActions={() => renderLeftActions(item.item._id)}
+                  //   onSwipeableWillOpen={() => {}}>
+                    <ShoppingCartItem
+                      image={item.item._imageUrl}
+                      name={item.item._title}
+                      quantity={item.item._quatity}
+                      id={item.item._id}
+                      unitPrice={item.item._unitPrice}
+                    />
+                  // </Swipeable>
+                );
+              }}
+            />
+          ) : (
+            <EmptyCart />
+          )}
         </View>
       </Animatable.View>
     </View>
@@ -138,8 +194,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     flex: 40,
     backgroundColor: AppColors.white,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    // borderTopLeftRadius: 30,
+    // borderTopRightRadius: 30,
     width: Dimensions.get('window').width,
   },
   topRow: {

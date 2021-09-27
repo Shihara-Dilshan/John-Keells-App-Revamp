@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
-import AppColors from '../../config/colors';
+import {View, Image, Text, TouchableWithoutFeedback} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-
-export default function ItemCountController({icon, color}) {
+export default function ItemCountController({icon, color, onPress}) {
   return (
-    <Icon name={icon} size={30} color={color} />
+    <TouchableWithoutFeedback onPress={() => onPress()} >
+      <Icon name={icon} size={40} color={color} />
+    </TouchableWithoutFeedback>
   );
 }
