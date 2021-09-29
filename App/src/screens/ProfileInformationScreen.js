@@ -15,6 +15,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppColors from '../config/colors';
 import {Formik} from 'formik';
+import * as yup from 'yup';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,18 @@ export default function ProfileInformationScreen({navigation}) {
   );
 }
 
+const UserSchema = yup.object({
+  title: yup.string().required().min(2),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+  phoneNumber: yup
+    .string()
+    .required()
+    .test('isValidPhoneNumber', 'Enter a valid phone number', val => {
+      return !isNaN(val) && val.length == 9;
+    }),
+});
+
 const ProfileInformation = () => {
   const [selectedTitle, setSelectedTitle] = useState('Mr.');
   const initialValues = {
@@ -78,6 +91,7 @@ const ProfileInformation = () => {
         </View>
         <Formik
           initialValues={initialValues}
+          validationSchema={UserSchema}
           onSubmit={values => {
             values.title = selectedTitle;
             updatedSuccessfullyToast();
@@ -108,6 +122,9 @@ const ProfileInformation = () => {
                   style={styles.formInput}
                   onChangeText={props.handleChange('firstName')}
                 />
+                <Text style={styles.errorText}>
+                  {props.touched.firstName && props.errors.firstName}
+                </Text>
               </View>
               <View style={styles.formRow}>
                 <Text style={styles.formRowHeader}>Last Name</Text>
@@ -116,6 +133,9 @@ const ProfileInformation = () => {
                   style={styles.formInput}
                   onChangeText={props.handleChange('lastName')}
                 />
+                <Text style={styles.errorText}>
+                  {props.touched.lastName && props.errors.lastName}
+                </Text>
               </View>
               <View style={styles.formRow}>
                 <Text style={styles.formRowHeader}>Phone Number</Text>
@@ -134,6 +154,9 @@ const ProfileInformation = () => {
                     onChangeText={props.handleChange('phoneNumber')}
                   />
                 </View>
+                <Text style={styles.errorText}>
+                  {props.touched.phoneNumber && props.errors.phoneNumber}
+                </Text>
               </View>
               <View style={styles.formRow}>
                 <SaveButton title="Save Changes" onPress={props.handleSubmit} />
@@ -220,6 +243,10 @@ const styles = StyleSheet.create({
   phoneInput: {
     flex: 2,
   },
+  errorText: {
+    fontSize: 12,
+    color: AppColors.crimson,
+  },
   flagContainer: {
     paddingLeft: 6,
     paddingRight: 6,
@@ -238,7 +265,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 10,
     paddingHorizontal: 12,
-    marginTop: 40,
+    marginTop: 30,
   },
   appButtonText: {
     fontSize: 18,
