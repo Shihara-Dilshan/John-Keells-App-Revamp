@@ -1,6 +1,12 @@
 import * as React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Text, View, StyleSheet, ScrollView} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {Card, Title, Paragraph, Appbar} from 'react-native-paper';
 import AppColors from '../../config/colors';
 
