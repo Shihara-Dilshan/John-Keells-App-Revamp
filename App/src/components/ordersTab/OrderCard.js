@@ -1,6 +1,12 @@
 import * as React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Text, View, StyleSheet, ScrollView} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {Card, Title, Paragraph, Appbar} from 'react-native-paper';
 import AppColors from '../../config/colors';
 
@@ -14,7 +20,7 @@ export default function OrderCard({
   return (
     <Card style={styles.orderItem}>
       <Card.Content>
-        <Title>Order No. {orderNo}</Title>
+        <Title style={styles.orderNumber}>Order No. {orderNo}</Title>
         <View style={styles.orderItemContent}>
           <View style={styles.orderItemOuterRow}>
             <View style={styles.orderItemRow}>
@@ -48,6 +54,10 @@ const styles = StyleSheet.create({
   orderItem: {
     marginBottom: 10,
   },
+  orderNumber: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
   orderItemContent: {
     display: 'flex',
     justifyContent: 'flex-start',
@@ -58,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   orderItemOuterRow: {
-    marginVertical: 5,
+    marginVertical: 2,
   },
   orderItemTitle: {
     fontSize: 14,
@@ -66,7 +76,7 @@ const styles = StyleSheet.create({
     color: AppColors.lightestGrey,
   },
   orderItemInfo: {
-    fontSize: 18,
+    fontSize: 16,
     color: AppColors.black,
   },
   orderItemStatus: {

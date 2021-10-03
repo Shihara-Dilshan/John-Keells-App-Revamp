@@ -1,3 +1,4 @@
+import {createStackNavigator} from '@react-navigation/stack';
 import React, {useContext} from 'react';
 import {
   Text,
@@ -6,13 +7,15 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import {Card, Title, Paragraph, Appbar} from 'react-native-paper';
 import OrderCard from '../../components/ordersTab/OrderCard';
 import AppColors from '../../config/colors';
 import {OrderContext} from '../../contexts/order/OrderContext';
+import OrderItemScreen from '../orderItemScreens/OrderItemScreen';
 
-export default function OrdersTab() {
+const OrderList = ({navigation}) => {
   const [orderData, setOrderData] = useContext(OrderContext);
   return (
     <View style={styles.container}>
@@ -26,17 +29,46 @@ export default function OrdersTab() {
         keyExtractor={orderData => orderData._id}
         renderItem={orderData => {
           return (
-            <OrderCard
-              orderNo={orderData.item._orderNumber}
-              orderDate={orderData.item._orderDate}
-              totalPrice={orderData.item._total}
-              ordertype={orderData.item._oderType}
-              orderStatus={orderData.item._orderStatus}
-            />
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() =>
+                navigation.navigate('Order', {item: orderData.item})
+              }>
+              <OrderCard
+                orderNo={orderData.item._orderNumber}
+                orderDate={orderData.item._orderDate}
+                totalPrice={orderData.item._total}
+                ordertype={orderData.item._oderType}
+                orderStatus={orderData.item._orderStatus}
+              />
+            </TouchableOpacity>
           );
         }}
       />
     </View>
+  );
+};
+
+export default function OrdersTab() {
+  const OrderStack = createStackNavigator();
+
+  return (
+    <OrderStack.Navigator>
+      <OrderStack.Screen
+        name="OrderList"
+        component={OrderList}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <OrderStack.Screen
+        name="Order"
+        component={OrderItemScreen}
+        options={({route}) => ({
+          title: 'Order No. ' + route.params.item._orderNumber,
+        })}
+      />
+    </OrderStack.Navigator>
   );
 }
 

@@ -10,4 +10,5 @@ export default class AppColors {
   static formgrey = '#f4f4f4';
   static statusBlue = '#5856EB';
   static lightestGrey = '#8B8B8B';
+  static crimson = 'crimson';
 }
