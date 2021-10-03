@@ -46,6 +46,9 @@ export default function HomeScreenTabNavigator({navigation}) {
             />
           ),
           headerStyle: {
+            elevation: 0,
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
             backgroundColor: AppColors.primaryGreen,
           },
           headerLeft: () => <MainHeaderLeft navigation={navigation} />,
