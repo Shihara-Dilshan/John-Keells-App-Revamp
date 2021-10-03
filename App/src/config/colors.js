@@ -1,5 +1,6 @@
 export default class AppColors {
   static primaryGreen = '#61BC4A';
+  static secondaryGreen= "#348C1A";
   static primaryRed = 'red';
   static primarygrey = '#585858';
   static lightergrey = '#A8A8A8';
