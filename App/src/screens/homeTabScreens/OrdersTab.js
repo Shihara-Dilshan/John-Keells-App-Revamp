@@ -14,9 +14,13 @@ import OrderCard from '../../components/ordersTab/OrderCard';
 import AppColors from '../../config/colors';
 import {OrderContext} from '../../contexts/order/OrderContext';
 import OrderItemScreen from '../orderItemScreens/OrderItemScreen';
+import ProductsInOrder from '../orderItemScreens/ProductsInOrder';
 
 const OrderList = ({navigation}) => {
-  const [orderData, setOrderData] = useContext(OrderContext);
+  const {orders, currentlySelected} = useContext(OrderContext);
+  const [orderData, setOrderData] = orders;
+  const [selectedOrder, setselectedOrder] = currentlySelected;
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Orders</Text>
@@ -31,9 +35,10 @@ const OrderList = ({navigation}) => {
           return (
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() =>
-                navigation.navigate('Order', {item: orderData.item})
-              }>
+              onPress={() => {
+                setselectedOrder(orderData.item);
+                navigation.navigate('Order', {id: orderData.item._orderNumber});
+              }}>
               <OrderCard
                 orderNo={orderData.item._orderNumber}
                 orderDate={orderData.item._orderDate}
@@ -51,7 +56,6 @@ const OrderList = ({navigation}) => {
 
 export default function OrdersTab() {
   const OrderStack = createStackNavigator();
-
   return (
     <OrderStack.Navigator>
       <OrderStack.Screen
@@ -65,7 +69,14 @@ export default function OrdersTab() {
         name="Order"
         component={OrderItemScreen}
         options={({route}) => ({
-          title: 'Order No. ' + route.params.item._orderNumber,
+          title: 'Order No. ' + route.params.id,
+        })}
+      />
+      <OrderStack.Screen
+        name="ProductsInOrder"
+        component={ProductsInOrder}
+        options={({route}) => ({
+          title: 'Order No. ' + route.params.id,
         })}
       />
     </OrderStack.Navigator>
