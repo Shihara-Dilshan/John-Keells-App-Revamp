@@ -12,8 +12,8 @@ export const AppAuthProvider = props => {
   });
 
   return (
-    <CartContext.Provider value={[AppAuthState, setAppAuthState]}>
+    <AppAuthContext.Provider value={[AppAuthState, setAppAuthState]}>
       {props.children}
-    </CartContext.Provider>
+    </AppAuthContext.Provider>
   );
 };
