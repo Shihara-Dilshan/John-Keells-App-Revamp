@@ -12,4 +12,5 @@ export default class AppColors {
   static statusBlue = '#5856EB';
   static lightestGrey = '#8B8B8B';
   static crimson = 'crimson';
+  static transparent = 'rgba(255,255,255,0.0)';
 }
