@@ -13,4 +13,5 @@ export default class AppColors {
   static lightestGrey = '#8B8B8B';
   static crimson = 'crimson';
   static headerGrey = '#E7E3E3';
+  static transparent = 'rgba(255,255,255,0.0)';
 }
