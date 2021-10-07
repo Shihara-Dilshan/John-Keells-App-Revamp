@@ -4,6 +4,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppColors from '../../config/colors';
 import {AppAuthContext} from '../../contexts/app/AppAuthContext';
+import SignUpOrLoginScreen from './SignUpOrLoginScreen';
+import SignUpUserInfoScreen from './SignUpUserInfoScreen';
+import SignUpDeliveryInfo from './SignUpDeliveryInfo';
+import ContinueToHome from './ContinueToHome';
 
 const Stack = createStackNavigator();
 
@@ -13,9 +17,10 @@ export default function SignUpScreens() {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="First" component={signUpFirstScreen} />
-      <Stack.Screen name="second" component={signUpSecondScreen} />
-      <Stack.Screen name="login" component={loginScreen} />
+      <Stack.Screen name="First" component={SignUpOrLoginScreen} />
+      <Stack.Screen name="UserInfo" component={SignUpUserInfoScreen} />
+      <Stack.Screen name="DeliveryInfo" component={SignUpDeliveryInfo} />
+      <Stack.Screen name="ContinueToHome" component={ContinueToHome} />
     </Stack.Navigator>
   );
 }
