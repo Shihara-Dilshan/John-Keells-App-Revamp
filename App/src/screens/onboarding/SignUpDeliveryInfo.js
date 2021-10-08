@@ -2,6 +2,7 @@ import CheckBox from '@react-native-community/checkbox';
 import {Picker} from '@react-native-picker/picker';
 import React, {useState} from 'react';
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -25,85 +26,87 @@ const SignUpDeliveryInfo = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Delivery Information</Text>
-      <Text style={styles.headerDesc}>
-        Please enter your delivery location details below
-      </Text>
-      <View style={styles.formRow}>
-        <View style={styles.firstCol}>
-          <View style={styles.col1}>
-            <Text style={styles.inputTitles}>House No.</Text>
-            <TextInput style={styles.formInput} />
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.header}>Delivery Information</Text>
+        <Text style={styles.headerDesc}>
+          Please enter your delivery location details below
+        </Text>
+        <View style={styles.formRow}>
+          <View style={styles.firstCol}>
+            <View style={styles.col1}>
+              <Text style={styles.inputTitles}>House No.</Text>
+              <TextInput style={styles.formInput} />
+            </View>
+          </View>
+          <View style={styles.secondCol}>
+            <View style={styles.col2}>
+              <Text style={styles.inputTitles}>Street Name</Text>
+              <TextInput style={styles.formInput} />
+            </View>
           </View>
         </View>
-        <View style={styles.secondCol}>
-          <View style={styles.col2}>
-            <Text style={styles.inputTitles}>Street Name</Text>
-            <TextInput style={styles.formInput} />
-          </View>
-        </View>
-      </View>
-      <View style={styles.formRow}>
-        <View style={styles.formCol}>
-          <Text style={styles.inputTitles}>Suburb</Text>
-          <View style={styles.titlePicker}>
-            <Picker
-              itemStyle={styles.pickerItem}
-              /*selectedValue={selectedTitle}
+        <View style={styles.formRow}>
+          <View style={styles.formCol}>
+            <Text style={styles.inputTitles}>Suburb</Text>
+            <View style={styles.titlePicker}>
+              <Picker
+                itemStyle={styles.pickerItem}
+                /*selectedValue={selectedTitle}
                     onValueChange={(itemValue, itemIndex) =>
                       setSelectedTitle(itemValue)
                     }*/
-            >
-              <Picker.Item label="Mr." value="mr" />
-              <Picker.Item label="Mrs." value="mrs" />
-              <Picker.Item label="Ms." value="ms" />
-              <Picker.Item label="Dr." value="dr" />
-              <Picker.Item label="Rev." value="rev" />
-            </Picker>
+              >
+                <Picker.Item label="Mr." value="mr" />
+                <Picker.Item label="Mrs." value="mrs" />
+                <Picker.Item label="Ms." value="ms" />
+                <Picker.Item label="Dr." value="dr" />
+                <Picker.Item label="Rev." value="rev" />
+              </Picker>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={styles.formRow}>
-        <View style={styles.formCol}>
-          <Text style={styles.inputTitles}>Delivery Instructions</Text>
-          <TextInput
-            style={styles.formInput}
-            multiline={true}
-            numberOfLines={5}
-            onChangeText={text => onChangeInstructions(text)}
-            value={delInstructions}
+        <View style={styles.formRow}>
+          <View style={styles.formCol}>
+            <Text style={styles.inputTitles}>Delivery Instructions</Text>
+            <TextInput
+              style={styles.formInput}
+              multiline={true}
+              numberOfLines={5}
+              onChangeText={text => onChangeInstructions(text)}
+              value={delInstructions}
+            />
+            <Text style={{textAlign: 'right'}}>{instructionWordCount}/120</Text>
+          </View>
+        </View>
+        <View style={styles.formRow}>
+          <Text style={{fontSize: 12, marginTop: -10}}>
+            (Provide information relevant to the delivery i.e. landmarks near
+            your home, call before delivery, times to avoid delivery, etc.)
+          </Text>
+        </View>
+        <View style={[styles.formRow, styles.formCheckBox]}>
+          <CheckBox
+            disabled={false}
+            value={addressCheckbox}
+            onValueChange={newValue => setAddressCheckbox(newValue)}
+            tintColors={{
+              true: AppColors.primaryGreen,
+              false: AppColors.primaryGreen,
+            }}
           />
-          <Text style={{textAlign: 'right'}}>{instructionWordCount}/120</Text>
+          <Text>Set as default address</Text>
+        </View>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={navigateToNextPage}
+            style={styles.nextBtn}>
+            <Text style={styles.nextBtnText}>Next</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.formRow}>
-        <Text style={{fontSize: 12, marginTop: -10}}>
-          (Provide information relevant to the delivery i.e. landmarks near your
-          home, call before delivery, times to avoid delivery, etc.)
-        </Text>
-      </View>
-      <View style={[styles.formRow, styles.formCheckBox]}>
-        <CheckBox
-          disabled={false}
-          value={addressCheckbox}
-          onValueChange={newValue => setAddressCheckbox(newValue)}
-          tintColors={{
-            true: AppColors.primaryGreen,
-            false: AppColors.primaryGreen,
-          }}
-        />
-        <Text>Set as default address</Text>
-      </View>
-      <View style={styles.buttonRow}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={navigateToNextPage}
-          style={styles.nextBtn}>
-          <Text style={styles.nextBtnText}>Next</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 

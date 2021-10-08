@@ -7,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import AppColors from '../../config/colors';
 
@@ -20,61 +21,63 @@ const SignUpOrLoginScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerText}>Welcome to Keells Online</Text>
-      <View style={styles.imgContainer}>
-        <Image
-          style={styles.logo}
-          source={require('../../assets/images/keellslogo2.png')}
-        />
-      </View>
-      <View style={styles.row}>
-        <View style={styles.formRow}>
-          <Text style={styles.formRowHeader}>Phone Number</Text>
-          <View style={styles.formPhoneNumberInput}>
-            <View style={styles.flagContainer}>
-              <Image
-                style={styles.phoneFlag}
-                source={require('../../assets/images/sl_flag.png')}
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.headerText}>Welcome to Keells Online</Text>
+        <View style={styles.imgContainer}>
+          <Image
+            style={styles.logo}
+            source={require('../../assets/images/keellslogo2.png')}
+          />
+        </View>
+        <View style={styles.row}>
+          <View style={styles.formRow}>
+            <Text style={styles.formRowHeader}>Phone Number</Text>
+            <View style={styles.formPhoneNumberInput}>
+              <View style={styles.flagContainer}>
+                <Image
+                  style={styles.phoneFlag}
+                  source={require('../../assets/images/sl_flag.png')}
+                />
+              </View>
+              <Text style={styles.phoneCode}>+94</Text>
+              <TextInput
+                style={[styles.formInput, styles.phoneInput]}
+                keyboardType={'phone-pad'}
               />
             </View>
-            <Text style={styles.phoneCode}>+94</Text>
-            <TextInput
-              style={[styles.formInput, styles.phoneInput]}
-              keyboardType={'phone-pad'}
-            />
           </View>
         </View>
-      </View>
-      <View style={styles.row}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={onClickNext}
-          style={styles.nextBtn}>
-          <Text style={styles.nextBtnText}>Next</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.rowBetween}>
-        <Text style={styles.rowBetweenText}>Or</Text>
-        <Text style={styles.rowBetweenText}>
-          Just want to browse the store? Click below
-        </Text>
-      </View>
-      <View style={styles.row}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={navigateToHome}
-          style={styles.nextBtn}>
-          <Text style={styles.nextBtnText}>Continue as Guest</Text>
-        </TouchableOpacity>
-      </View>
-      {/* <Button
+        <View style={styles.row}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={onClickNext}
+            style={styles.nextBtn}>
+            <Text style={styles.nextBtnText}>Next</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.rowBetween}>
+          <Text style={styles.rowBetweenText}>Or</Text>
+          <Text style={styles.rowBetweenText}>
+            Just want to browse the store? Click below
+          </Text>
+        </View>
+        <View style={styles.row}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={navigateToHome}
+            style={styles.nextBtn}>
+            <Text style={styles.nextBtnText}>Continue as Guest</Text>
+          </TouchableOpacity>
+        </View>
+        {/* <Button
         title="Next screen"
         onPress={() => {
           navigation.navigate('second');
         }}
       /> */}
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 

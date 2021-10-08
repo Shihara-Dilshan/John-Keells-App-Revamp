@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  ScrollView,
 } from 'react-native';
 import AppColors from '../../config/colors';
 import {Picker} from '@react-native-picker/picker';
@@ -21,78 +22,80 @@ const SignUpUserInfoScreen = ({navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.containerHeading}>Sign Up</Text>
-      <Text style={styles.headerDesc}>
-        Sign up or Link your Existing Account
-      </Text>
-      <View style={styles.formRow}>
-        <Text style={styles.formRowHeader}>Title</Text>
-        <View style={styles.titlePicker}>
-          <Picker
-            itemStyle={styles.pickerItem}
-            /*selectedValue={selectedTitle}
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={styles.containerHeading}>Sign Up</Text>
+        <Text style={styles.headerDesc}>
+          Sign up or Link your Existing Account
+        </Text>
+        <View style={styles.formRow}>
+          <Text style={styles.formRowHeader}>Title</Text>
+          <View style={styles.titlePicker}>
+            <Picker
+              itemStyle={styles.pickerItem}
+              /*selectedValue={selectedTitle}
                     onValueChange={(itemValue, itemIndex) =>
                       setSelectedTitle(itemValue)
                     }*/
-          >
-            <Picker.Item label="Mr." value="mr" />
-            <Picker.Item label="Mrs." value="mrs" />
-            <Picker.Item label="Ms." value="ms" />
-            <Picker.Item label="Dr." value="dr" />
-            <Picker.Item label="Rev." value="rev" />
-          </Picker>
+            >
+              <Picker.Item label="Mr." value="mr" />
+              <Picker.Item label="Mrs." value="mrs" />
+              <Picker.Item label="Ms." value="ms" />
+              <Picker.Item label="Dr." value="dr" />
+              <Picker.Item label="Rev." value="rev" />
+            </Picker>
+          </View>
+        </View>
+        <View style={styles.formRow}>
+          <Text style={styles.formRowHeader}>First Name</Text>
+          <TextInput style={styles.formInput} />
+        </View>
+        <View style={styles.formRow}>
+          <Text style={styles.formRowHeader}>Last Name</Text>
+          <TextInput style={styles.formInput} />
+        </View>
+        <View style={[styles.formRow, styles.formConditions]}>
+          <CheckBox
+            disabled={false}
+            value={toggleTCCheckBox}
+            onValueChange={newValue => setToggleTCCheckBox(newValue)}
+            tintColors={{
+              true: AppColors.primaryGreen,
+              false: AppColors.primaryGreen,
+            }}
+          />
+          <Text style={styles.finePrint}>
+            I have read and agreed to your
+            <Text style={styles.importantText}>Terms of Service</Text> and
+            <Text style={styles.importantText}>Privacy Policy</Text> and hereby
+            give consent for you to use my data in terms thereof.
+          </Text>
+        </View>
+        <View style={[styles.formRow, styles.formConditions]}>
+          <CheckBox
+            disabled={false}
+            value={togglePromotionsCheckBox}
+            onValueChange={newValue => setTogglePromotionsCheckBox(newValue)}
+            tintColors={{
+              true: AppColors.primaryGreen,
+              false: AppColors.primaryGreen,
+            }}
+          />
+          <Text style={styles.finePrint}>
+            I would like to recieve information about your products/services and
+            promotions.
+          </Text>
+        </View>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={onPressSignUp}
+            style={styles.nextBtn}>
+            <Text style={styles.nextBtnText}>Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.formRow}>
-        <Text style={styles.formRowHeader}>First Name</Text>
-        <TextInput style={styles.formInput} />
-      </View>
-      <View style={styles.formRow}>
-        <Text style={styles.formRowHeader}>Last Name</Text>
-        <TextInput style={styles.formInput} />
-      </View>
-      <View style={[styles.formRow, styles.formConditions]}>
-        <CheckBox
-          disabled={false}
-          value={toggleTCCheckBox}
-          onValueChange={newValue => setToggleTCCheckBox(newValue)}
-          tintColors={{
-            true: AppColors.primaryGreen,
-            false: AppColors.primaryGreen,
-          }}
-        />
-        <Text style={styles.finePrint}>
-          I have read and agreed to your
-          <Text style={styles.importantText}>Terms of Service</Text> and
-          <Text style={styles.importantText}>Privacy Policy</Text> and hereby
-          give consent for you to use my data in terms thereof.
-        </Text>
-      </View>
-      <View style={[styles.formRow, styles.formConditions]}>
-        <CheckBox
-          disabled={false}
-          value={togglePromotionsCheckBox}
-          onValueChange={newValue => setTogglePromotionsCheckBox(newValue)}
-          tintColors={{
-            true: AppColors.primaryGreen,
-            false: AppColors.primaryGreen,
-          }}
-        />
-        <Text style={styles.finePrint}>
-          I would like to recieve information about your products/services and
-          promotions.
-        </Text>
-      </View>
-      <View style={styles.buttonRow}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={onPressSignUp}
-          style={styles.nextBtn}>
-          <Text style={styles.nextBtnText}>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
