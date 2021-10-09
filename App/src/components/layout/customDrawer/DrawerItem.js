@@ -1,22 +1,27 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppColors from '../../../config/colors';
+import {AppAuthContext} from '../../../contexts/app/AppAuthContext';
 
 export default DrawerItem = ({props, data}) => {
+  const [AppAuthState, setAppAuthState] = useContext(AppAuthContext);
+
   return (
     <TouchableOpacity
       onPress={() => {
-        props.navigation.navigate(data.actionPageUrl);
+        if (data.title === 'Logout') {
+          setAppAuthState({isLoggedIn: false});
+        } else {
+          props.navigation.navigate(data.actionPageUrl);
+        }
       }}>
       <View style={styles.upperContainer}>
         <View style={styles.innerLeftContainer}>
           <Icon name={data.icon} size={30} color={AppColors.primarygrey} />
           <View style={styles.detailsContainer}>
             <Text style={styles.titleStyle}>{data.title}</Text>
-            <Text style={styles.detailTitleStyle}>
-              {data.subtitle}
-            </Text>
+            <Text style={styles.detailTitleStyle}>{data.subtitle}</Text>
           </View>
         </View>
         <Icon
