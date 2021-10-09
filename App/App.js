@@ -24,6 +24,7 @@ import HelpMeNevigateScreen from './src/screens/HelpMeNevigateScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
 import CartScreen from './src/screens/CartScreen';
 import SignUpScreens from './src/screens/onboarding/SignUpScreens';
+import CategoryItemList from './src/screens/categoryScreens/CategoryItemList';
 
 import {AppAuthContext} from './src/contexts/app/AppAuthContext';
 
@@ -96,6 +97,7 @@ const App = () => {
           drawer navigater. 
           */}
           <Drawer.Screen name="cartScreen" component={CartScreen} />
+          <Drawer.Screen name="categoryItems" component={CategoryItemList} />
         </Drawer.Navigator>
       ) : (
         <SignUpScreens />
