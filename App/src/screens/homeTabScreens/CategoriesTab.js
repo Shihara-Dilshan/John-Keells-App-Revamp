@@ -9,9 +9,9 @@ import {
   LayoutAnimation,
 } from 'react-native';
 import AppColors from '../../config/colors';
-import CONTENT from "./misc/CategoryData";
+import CONTENT from './misc/CategoryData';
 
-const ExpandableComponent = ({item, onclickFunction}) => {
+const ExpandableComponent = ({item, onclickFunction, navigation}) => {
   const [layoutHeight, setlayoutHeight] = useState(0);
 
   useEffect(() => {
@@ -29,7 +29,12 @@ const ExpandableComponent = ({item, onclickFunction}) => {
       </TouchableOpacity>
       <View style={{height: layoutHeight, overflow: 'hidden'}}>
         {item.subcategory.map((item, key) => (
-          <TouchableOpacity key={key} style={style.content}>
+          <TouchableOpacity
+            key={key}
+            style={style.content}
+            onPress={() => {
+              navigation.navigate('categoryItems');
+            }}>
             <Text style={style.text}>{item.val}</Text>
             <View style={style.separator} />
           </TouchableOpacity>
@@ -39,7 +44,7 @@ const ExpandableComponent = ({item, onclickFunction}) => {
   );
 };
 
-export default function CategoriesTab() {
+export default function CategoriesTab({navigation}) {
   const [multiSelect, setmultiSelect] = useState(false);
   const [listDateSource, setlistDateSource] = useState(CONTENT);
   const updateLayout = index => {
@@ -72,6 +77,7 @@ export default function CategoriesTab() {
         <ScrollView>
           {listDateSource.map((item, key) => (
             <ExpandableComponent
+              navigation={navigation}
               key={item.category_name}
               item={item}
               onclickFunction={() => {
