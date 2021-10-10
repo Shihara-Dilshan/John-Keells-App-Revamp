@@ -26,6 +26,7 @@ import CartScreen from './src/screens/CartScreen';
 import SignUpScreens from './src/screens/onboarding/SignUpScreens';
 
 import {AppAuthContext} from './src/contexts/app/AppAuthContext';
+import SearchSuggesion from './src/components/homeTab/SearchSuggesions';
 
 const Drawer = createDrawerNavigator();
 
@@ -96,6 +97,7 @@ const App = () => {
           drawer navigater. 
           */}
           <Drawer.Screen name="cartScreen" component={CartScreen} />
+          <Drawer.Screen name="searchSuggesion" component={SearchSuggesion} />
         </Drawer.Navigator>
       ) : (
         <SignUpScreens />
