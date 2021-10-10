@@ -31,7 +31,7 @@ export default Header = ({navigation}) => {
             <Text style={classes.searchText}>Search here</Text>
           </View>
       </TouchableOpacity>
-        <LocationChangeBar />
+        <LocationChangeBar navigation={navigation} />
       </View>
   );
 };

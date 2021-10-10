@@ -25,6 +25,7 @@
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-slider-box": "^1.1.8",
+    "react-native-maps": "^0.29.3",
     "react-native-modal": "^13.0.0",
     "react-native-paper": "^4.9.2",
     "react-native-raw-bottom-sheet": "^2.2.0",
@@ -33,6 +34,7 @@
     "react-native-screens": "^3.7.0",
     "react-native-snackbar": "^2.4.0",
     "react-native-vector-icons": "^8.1.0",
+    "rn-sliding-up-panel": "^2.4.5",
     "yup": "^0.32.9"
   },
   "devDependencies": {

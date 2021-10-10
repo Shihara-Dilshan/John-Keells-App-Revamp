@@ -47,7 +47,9 @@ const UtilityScreenFirst = ({navigation}) => {
   return (
     //TODO : do not use inline styles. use StyleSheet
     <View style={styles.container}>
-        <CommonBackBar title="Utility Payments" />
+        <View style={[styles.backBar, {justifyContent: 'center'}]}>
+          <Text style={styles.backBarTextText}>Utility Payments</Text>
+        </View>
         <CardSectionArea dataItems={utilityItems} navigation={navigation} path="second"  />
     </View>
   );

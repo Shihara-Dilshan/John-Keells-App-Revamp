@@ -1,11 +1,12 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import AppColors from '../../config/colors';
 
-const LocationChangeBar = () => {
+const LocationChangeBar = ({navigation}) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={() => {navigation.navigate("pickupLocationScreen")}}
       style={{
         display: 'flex',
         flexDirection: 'row',
@@ -32,7 +33,7 @@ const LocationChangeBar = () => {
         />
       </View>
       <Text style={{color: AppColors.white}}>Change</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

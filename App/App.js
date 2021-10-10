@@ -27,6 +27,7 @@ import SignUpScreens from './src/screens/onboarding/SignUpScreens';
 
 import {AppAuthContext} from './src/contexts/app/AppAuthContext';
 import SearchSuggesion from './src/components/homeTab/SearchSuggesions';
+import PickupLocationScreen from './src/components/pickupLocation/PickupLocationScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -98,6 +99,7 @@ const App = () => {
           */}
           <Drawer.Screen name="cartScreen" component={CartScreen} />
           <Drawer.Screen name="searchSuggesion" component={SearchSuggesion} />
+          <Drawer.Screen name="pickupLocationScreen" component={PickupLocationScreen} />
         </Drawer.Navigator>
       ) : (
         <SignUpScreens />
