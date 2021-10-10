@@ -5,6 +5,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import AppColors from './src/config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+//TODO:: FIXME
+console.disableYellowBox = true;
+
 //custom components
 import HomeScreen from './src/screens/HomeScreen';
 import {CustomDrawer} from './src/components/layout/customDrawer/CustomDrawer';
@@ -24,7 +27,9 @@ import HelpMeNevigateScreen from './src/screens/HelpMeNevigateScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
 import CartScreen from './src/screens/CartScreen';
 import SignUpScreens from './src/screens/onboarding/SignUpScreens';
+import Intro from './src/components/intro/intro';
 
+import CategoryItemList from './src/screens/categoryScreens/CategoryItemList';
 import {AppAuthContext} from './src/contexts/app/AppAuthContext';
 import SearchSuggesion from './src/components/homeTab/SearchSuggesions';
 import PickupLocationScreen from './src/components/pickupLocation/PickupLocationScreen';
@@ -40,8 +45,7 @@ const App = () => {
   }, []);
 
   const [AppAuthState, setAppAuthState] = useContext(AppAuthContext);
-  console.log(AppAuthState);
-  return (
+  return !AppAuthState.isFirstTime ? (
     <NavigationContainer>
       <StatusBar backgroundColor={AppColors.black} />
       {splashLoading ? (
@@ -100,11 +104,14 @@ const App = () => {
           <Drawer.Screen name="cartScreen" component={CartScreen} />
           <Drawer.Screen name="searchSuggesion" component={SearchSuggesion} />
           <Drawer.Screen name="pickupLocationScreen" component={PickupLocationScreen} />
+          <Drawer.Screen name="categoryItems" component={CategoryItemList} />
         </Drawer.Navigator>
       ) : (
         <SignUpScreens />
       )}
     </NavigationContainer>
+  ) : (
+    <Intro />
   );
 };
 

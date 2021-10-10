@@ -4,11 +4,14 @@ import * as Animatable from 'react-native-animatable';
 import AppColors from '../config/colors';
 import ShoppingCartItem from '../components/shoppingCart/ShoppingCartItem';
 import Snackbar from 'react-native-snackbar';
+import RBSheet from "react-native-raw-bottom-sheet";
+import Payment from '../components/payment/Payment';
 
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext,useRef} from 'react';
 import {
   Animated,
   View,
+  ScrollView,
   Text,
   StyleSheet,
   Dimensions,
@@ -23,6 +26,8 @@ import LineDividers from '../components/common/LineDivider';
 import EmptyCart from '../components/shoppingCart/EmptyCart';
 import {IconButton} from 'react-native-paper';
 import {CartContext} from '../contexts/cart/CartContext';
+import CommonDatePicker from '../components/common/DatePicker';
+import CommonTimePicker from '../components/common/TimePicker';
 
 const Stack = createStackNavigator();
 
@@ -53,11 +58,13 @@ export default function CartScreen({navigation}) {
         ),
       }}>
       <Stack.Screen name="cart" component={Cart} />
+      <Stack.Screen name="delivery" component={Delivery} />
     </Stack.Navigator>
   );
 }
 
-function Cart() {
+//TODO::separate to an another file
+function Cart({navigation}) {
   const [cartItems, setCartItems, actions] = useContext(CartContext);
 
   const calculateTotal = () => {
@@ -75,7 +82,7 @@ function Cart() {
       [
         {
           text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {},
           style: 'cancel',
         },
         {
@@ -144,8 +151,10 @@ function Cart() {
                 color={AppColors.white}
               />
               <CommonButton
-                title="Check Out"
-                onPress={() => {}}
+                title="Proceed"
+                onPress={() => {
+                  navigation.navigate('delivery');
+                }}
                 color={AppColors.primaryGreen}
               />
             </View>
@@ -160,13 +169,13 @@ function Cart() {
                   // <Swipeable
                   //   renderRightActions={() => renderLeftActions(item.item._id)}
                   //   onSwipeableWillOpen={() => {}}>
-                    <ShoppingCartItem
-                      image={item.item._imageUrl}
-                      name={item.item._title}
-                      quantity={item.item._quatity}
-                      id={item.item._id}
-                      unitPrice={item.item._unitPrice}
-                    />
+                  <ShoppingCartItem
+                    image={item.item._imageUrl}
+                    name={item.item._title}
+                    quantity={item.item._quatity}
+                    id={item.item._id}
+                    unitPrice={item.item._unitPrice}
+                  />
                   // </Swipeable>
                 );
               }}
@@ -180,7 +189,72 @@ function Cart() {
   );
 }
 
+//TODO::separate to an another file
+function Delivery({navigation}) {
+  const refRBSheet = useRef();
+  return (
+    <ScrollView>
+      <View style={styles.deliveryContainer}>
+        <Image
+          source={require('./../assets/images/cart/deliver.png')}
+          style={{borderRadius: 50, width: Dimensions.get('screen').width - 24}}
+        />
+        <Text
+          style={{
+            fontSize: 15,
+            textAlign: 'center',
+            marginTop: 20,
+            marginBottom: 20,
+          }}>
+          {'Please enter the conventient date\nand time for the delivery'}
+        </Text>
+        <Text style={{marginBottom: 10}}>Delivery Date</Text>
+        <CommonDatePicker />
+        <Text style={{marginBottom: 10, marginTop: 20}}>Delivery Time</Text>
+        <CommonTimePicker />
+        <View style={{marginTop: 30}}></View>
+        {/*TODO::extract to a function*/}
+        <RBSheet
+        ref={refRBSheet}
+        closeOnDragDown={true}
+        closeOnPressMask={false}
+        height={350}
+        customStyles={{
+          wrapper: {
+            backgroundColor: AppColors.black90
+          },
+          draggableIcon: {
+            backgroundColor: AppColors.primaryGreen
+          }
+        }}
+      >
+       <Payment />
+      </RBSheet>
+        <CommonButton
+          title="Proceed to payment"
+          onPress={() => {
+            Alert.alert(
+              'Notice from John Keells team',
+              'Due to high order volumes  we are experiencing there can be delay  in your order',
+              [
+                {
+                  text: "Cancel",
+                  onPress: () => console.log("Cancel Pressed"),
+                  style: "cancel"
+                },
+                { text: "OK", onPress: () => {refRBSheet.current.open();}}
+              ]
+            );
+          }}
+          color={AppColors.primaryGreen}
+        />
+      </View>
+    </ScrollView>
+  );
+}
+
 const styles = StyleSheet.create({
+  //cart
   container: {
     flex: 1,
     alignItems: 'center',
@@ -217,5 +291,9 @@ const styles = StyleSheet.create({
   },
   cartTopDataLeftText: {
     marginLeft: 5,
+  },
+  //deliver
+  deliveryContainer: {
+    padding: 12,
   },
 });

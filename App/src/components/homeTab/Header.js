@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Text,
   View,
@@ -9,7 +9,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 //import Icon from 'react-native-vector-icons/Ionicons';
 import AppColors from '../../config/colors';
