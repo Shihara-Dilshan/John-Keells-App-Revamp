@@ -7,6 +7,8 @@ import FontAwesomeIcon from 'react-native-vector-icons/Ionicons';
 import {white} from 'react-native-paper/lib/typescript/styles/colors';
 import ProfileInformationScreen from '../ProfileInformationScreen';
 import {AppAuthContext} from '../../contexts/app/AppAuthContext';
+import { SettingsScreen } from "react-native-settings-screen"
+
 
 export default function SettingsTab() {
   const ProfileEditStack = createStackNavigator();
@@ -43,7 +45,7 @@ const ProfileSettings = ({navigation}) => {
       [
         {
           text: 'NO',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {},
           style: 'cancel',
         },
         {text: 'YES', onPress: () => logout},

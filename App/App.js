@@ -5,6 +5,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import AppColors from './src/config/colors';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+//TODO:: FIXME
+console.disableYellowBox = true;
+
 //custom components
 import HomeScreen from './src/screens/HomeScreen';
 import {CustomDrawer} from './src/components/layout/customDrawer/CustomDrawer';
@@ -24,6 +27,7 @@ import HelpMeNevigateScreen from './src/screens/HelpMeNevigateScreen';
 import LoadingScreen from './src/screens/LoadingScreen';
 import CartScreen from './src/screens/CartScreen';
 import SignUpScreens from './src/screens/onboarding/SignUpScreens';
+import Intro from './src/components/intro/intro';
 
 import {AppAuthContext} from './src/contexts/app/AppAuthContext';
 
@@ -38,8 +42,7 @@ const App = () => {
   }, []);
 
   const [AppAuthState, setAppAuthState] = useContext(AppAuthContext);
-  console.log(AppAuthState);
-  return (
+  return !AppAuthState.isFirstTime ? (
     <NavigationContainer>
       <StatusBar backgroundColor={AppColors.black} />
       {splashLoading ? (
@@ -101,6 +104,8 @@ const App = () => {
         <SignUpScreens />
       )}
     </NavigationContainer>
+  ) : (
+    <Intro />
   );
 };
 

@@ -9,6 +9,8 @@ export default function CommonButton({title, onPress, color, icon}) {
       mode="contained"
       color={color}
       onPress={onPress}
+      height={50}
+      style={{justifyContent: "center"}}
       dark={color == AppColors.white ? false : true}>
       {title}
     </Button>

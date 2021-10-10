@@ -48,7 +48,7 @@ export const CartProvider = props => {
       [
         {
           text: 'No',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {},
           style: 'cancel',
         },
         {
