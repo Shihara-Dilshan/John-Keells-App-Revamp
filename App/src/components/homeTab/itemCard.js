@@ -15,7 +15,6 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import AppColors from '../../config/colors';
 
 export default ItemCard = ({data}) => {
-    console.log(data)
   return (
     <TouchableOpacity style={classes.recItem}>
       <View style={{alignItems: 'flex-end', margin: 10}}>
@@ -29,13 +28,13 @@ export default ItemCard = ({data}) => {
           style={[classes.recItemImg]}
         />
       </View>
-      <Text style={{marginTop: 15, fontWeight: '600'}}>Avacado</Text>
+      <Text style={{marginTop: 15, fontWeight: '600'}}>{data._title}</Text>
       <View
         style={{
           justifyContent: 'space-between',
           flexDirection: 'row',
         }}>
-        <Text style={{fontSize: 15, fontWeight: 'bold'}}>Rs.100 / 1kg</Text>
+        <Text style={{fontSize: 15, fontWeight: 'bold'}}>Rs.{data._unitPrice} / {data._smallestUnit}</Text>
       </View>
       <View
         style={{

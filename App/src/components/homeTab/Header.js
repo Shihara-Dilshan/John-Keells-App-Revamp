@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   Text,
   View,
@@ -9,21 +9,29 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ScrollView,
+  ScrollView
 } from 'react-native';
 //import Icon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import AppColors from '../../config/colors';
 import LocationChangeBar from '../../components/homeTab/LocationChangeBar';
+import {CategoryContext} from './../../contexts/homeTab/HomeTabContext';
 
 
 export default AdBanner = () => {
-  const bannerImages = [1, 2, 3, 4, 5, 6];
+  const [CategoryData, setCategoryData, actions] = useContext(CategoryContext);
   return (
     <View style={classes.searchInputContainer}>
         <TextInput
           style={classes.searchInput}
           placeholder="What are you looking for ?"
+          onChangeText={(input) => {
+            if(input == "" || input == " "){
+            actions.resetSearch();
+            }else{
+              actions.search(input);
+            }
+          }}
         />
         <LocationChangeBar />
       </View>
