@@ -12,28 +12,26 @@ import {
   ScrollView
 } from 'react-native';
 //import Icon from 'react-native-vector-icons/Ionicons';
-import Icon from 'react-native-vector-icons/AntDesign';
 import AppColors from '../../config/colors';
 import LocationChangeBar from '../../components/homeTab/LocationChangeBar';
-import {CategoryContext} from './../../contexts/homeTab/HomeTabContext';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
-export default AdBanner = () => {
-  const [CategoryData, setCategoryData, actions] = useContext(CategoryContext);
+export default Header = ({navigation}) => {
+  const bannerImages = [1, 2, 3, 4, 5, 6];
   return (
     <View style={classes.searchInputContainer}>
-        <TextInput
-          style={classes.searchInput}
-          placeholder="What are you looking for ?"
-          onChangeText={(input) => {
-            if(input == "" || input == " "){
-            actions.resetSearch();
-            }else{
-              actions.search(input);
-            }
-          }}
-        />
-        <LocationChangeBar />
+      <TouchableOpacity onPress={() => {
+        navigation.navigate('searchSuggesion')
+      }} >
+        <View
+            style={classes.searchInput}
+          >
+            <Icon name="search"  />
+            <Text style={classes.searchText}>Search here</Text>
+          </View>
+      </TouchableOpacity>
+        <LocationChangeBar navigation={navigation} />
       </View>
   );
 };
@@ -58,5 +56,10 @@ const classes = StyleSheet.create({
       borderRadius: 5,
       paddingHorizontal: 10,
       marginBottom: 8,
+      flexDirection: 'row',
+      alignItems: 'center'
     },
+    searchText: {
+      marginLeft: 10
+    }
   });

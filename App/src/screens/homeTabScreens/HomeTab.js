@@ -7,11 +7,11 @@ import Header from '../../components/homeTab/Header';
 import AdBanner from '../../components/homeTab/AdBanner';
 import {CategoryContext} from '../../contexts/homeTab/HomeTabContext';
 
-export default function HomeTab() {
+export default function HomeTab({navigation}) {
   const [CategoryData, setCategoryData] = useContext(CategoryContext);
   return (
     <View style={classes.container}>
-      <Header />
+      <Header navigation={navigation} />
       <FlatList
         data={[null, ...CategoryData]}
         keyExtractor={category => (category === null ? Math.random() : category._id)}
